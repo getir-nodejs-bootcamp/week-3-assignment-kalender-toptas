@@ -19,7 +19,7 @@ This repo was created for homework of Getir Node.js Bootcamp week-3.
 
 Clone the source code:
 
-    git clone git@github.com:toptaskalender/*
+    git clone git@github.com:getir-nodejs-bootcamp/week-3-assignment-kalender-toptas.git
 
 Install dependencies:
 
