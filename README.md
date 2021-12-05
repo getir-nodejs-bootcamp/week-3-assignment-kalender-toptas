@@ -17,6 +17,11 @@ This repo was created for homework of Getir Node.js Bootcamp week-3.
 | /users/:id | `PATCH` | `{ email: "jone@doe.com", password: "pass1234", passwordConfirm: "pass1234" }` | Authentication: Bearer Token | Returns updated resource or error message |`
 | /users/:id | `DELETE` | Empty | Authentication: Bearer Token | Returns status of destroying |`
 
+#### Notes
+
+- If you perform a `POST` request to `/users/sign-up`, `/users/log-in`, and `/users`, you have to provide the exact same data as shown above on a request body.
+- If you perform a `PUT` or `PATCH` request to `/users/:id`, you can provide one of the keys that is shown above, but be sure to provide `passwordConfirm` along with the `password` while trying to change `password`.
+
 ## Installation
 
 Clone the source code:
