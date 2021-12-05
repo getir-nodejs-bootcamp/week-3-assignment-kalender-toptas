@@ -39,9 +39,11 @@ class UserService {
   }
 
   findByIdAndPut(id, data) {
-    const user = this.findById(id);
+    const index = db.findIndex(user => user.id == id);
+    const user  = data;
+    user.id     = id;
 
-    user = data;
+    db.splice(index, 1, user);
 
     return user;
   }

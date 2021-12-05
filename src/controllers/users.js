@@ -39,9 +39,11 @@ async function createUser(req, res) {
   });
 }
 
-async function updateUser(req, res, next) {
+async function updateUser(req, res) {
   const { id }            = req.params;
-  const { body, method }  = req;
+  const { data, method }  = req;
+
+  console.log('data => ', data);
 
   let user;
 
