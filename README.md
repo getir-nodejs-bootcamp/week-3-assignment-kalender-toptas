@@ -8,11 +8,13 @@ This repo was created for homework of Getir Node.js Bootcamp week-3.
 
 | Route | HTTP Verb | Request Body | Header Body | Description |
 | --- | --- | --- | --- | --- |
+| /users/sign-up | `POST` | `{ email: "jone@doe.com", password: "pass1234", passwordConfirm: "pass1234" }` |  | Returns authentication bearer token and user data on body |
+| /users/log-in | `POST` | `{ email: "jone@doe.com", password: "pass1234" }` |  | Returns authentication bearer token and user data on body |
 | /users | `GET` | Empty | Authentication: Bearer Token | Returns resource |
 | /users/:id | `GET` | Empty | Authentication: Bearer Token | Returns resource |
-| /users | `POST` | `{ name: "Jone Doe", username: "jonedoe", email: "jonedoe@gmail.com" }`  | Authentication: Bearer Token | Returns created resource or error message |`
-| /users/:id | `PUT` | `{ name: "Jone Doe", username: "jonedoe", email: "jonedoe@gmail.com" }`  | Authentication: Bearer Token | Returns updated resource or error message |`
-| /users/:id | `PATCH` | `{ name: "Jone Doe", username: "jonedoe", email: "jonedoe@gmail.com" }`  | Authentication: Bearer Token | Returns updated resource or error message |`
+| /users | `POST` | `{ email: "jone@doe.com", password: "pass1234", passwordConfirm: "pass1234" }`  | Authentication: Bearer Token | Returns created resource or error message |`
+| /users/:id | `PUT` | `{ email: "jone@doe.com", password: "pass1234", passwordConfirm: "pass1234" }` | Authentication: Bearer Token | Returns updated resource or error message |`
+| /users/:id | `PATCH` | `{ email: "jone@doe.com", password: "pass1234", passwordConfirm: "pass1234" }` | Authentication: Bearer Token | Returns updated resource or error message |`
 | /users/:id | `DELETE` | Empty | Authentication: Bearer Token | Returns status of destroying |`
 
 ## Installation
