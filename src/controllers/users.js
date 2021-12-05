@@ -1,6 +1,6 @@
-const db                        = require('../database/database');
-const { userService }           = require('../services');
-const { AppError, catchAsync }  = require('../utils');
+const db              = require('../database/database');
+const { userService } = require('../services');
+const { catchAsync }  = require('../utils');
 
 const getUsers = catchAsync(async (_, res) => {
   const users = db;
