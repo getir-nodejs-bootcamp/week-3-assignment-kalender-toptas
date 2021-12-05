@@ -1,9 +1,9 @@
-const authorizationChecker  = require('./authorization-checker');
-const requestLogger         = require('./request-logger');
-const errorHandler          = require('./error-handler');
+const requestLogger = require('./request-logger');
+const errorHandler  = require('./error-handler');
+const verifyAuth    = require('./verify-auth');
 
 module.exports = {
-  authorizationChecker,
   requestLogger,
-  errorHandler
+  errorHandler,
+  verifyAuth
 }

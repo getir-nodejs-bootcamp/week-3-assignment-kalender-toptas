@@ -1,6 +1,15 @@
 const router  = require('express').Router();
 
 const {
+  verifyAuth
+}             = require('../middlewares');
+
+const {
+  signUp,
+  logIn
+}             = require('../controllers/auth');
+
+const {
   getUsers,
   getUser,
   createUser,
@@ -8,8 +17,14 @@ const {
   deleteUser
 }             = require('../controllers/users');
 
+router.route('/sign-up')
+  .post(signUp)
+
+router.route('/log-in')
+  .post(logIn)
+
 router.route('/')
-  .get(getUsers)
+  .get(verifyAuth, getUsers)
   .post(createUser)
 
 router.route('/:id')

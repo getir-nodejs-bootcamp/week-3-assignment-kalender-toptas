@@ -1,5 +1,5 @@
-const fsPromises        = require('fs/promises');
-const printLoggingInfo  = require('../utils/print-logging-info');
+const fsPromises            = require('fs/promises');
+const { printLoggingInfo }  = require('../utils');
 
 function requestLogger(req, _, next) {
   const requestedAt = new Date().toISOString();
