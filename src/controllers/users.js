@@ -1,8 +1,7 @@
-const { v4: uuidv4 }  = require('uuid');
 const db              = require('../db/database');
 const { userService } = require('../services');
 
-async function getUsers(req, res, next) {
+async function getUsers(_, res) {
   const users = db;
 
   res.status(200).json({
@@ -41,44 +40,20 @@ async function createUser(req, res) {
 }
 
 async function updateUser(req, res, next) {
-  try {
-    const { body, method }  = req;
-    const { id }            = req.params;
-    const validFields       = ['name', 'username', 'email'];
+  const { id }            = req.params;
+  const { body, method }  = req;
+
+  let user;
+
+  if (method === 'PATCH') user = userService.findByIdAndPatch(id, data)
+  else user = userService.findByIdAndPut(id, data)
   
-    /* Sanitize Body Payload */
-    for (let key of Object.keys(body)) {
-      const isFieldValid = validFields.includes(key);
-      if (!isFieldValid) {
-        delete body[key];
-      }
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user
     }
-  
-    const index = db.findIndex(user => user.id == id);
-    let user    = db.find(user => user.id == id);
-  
-    if (method === 'PATCH') {
-      for (let key in body) {
-        user[key] = body[key];
-      }
-    } else {
-      user = {
-        id: user.id,
-        ...body,
-      }
-    }
-  
-    db.splice(index, 1, user);
-  
-    res.status(200).json({
-      status: 'success',
-      data: {
-        user
-      }
-    });
-  } catch (err) {
-    next(err);
-  }
+  });
 }
 
 async function deleteUser(req, res) {

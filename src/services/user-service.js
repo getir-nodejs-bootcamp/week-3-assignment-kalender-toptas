@@ -27,6 +27,24 @@ class UserService {
 
     db.splice(index, 1);
   }
+
+  findByIdAndPatch(id, data) {
+    const user = this.findById(id);
+
+    Object.keys(data).forEach(key => {
+      user[key] = data[key];
+    })
+
+    return user;
+  }
+
+  findByIdAndPut(id, data) {
+    const user = this.findById(id);
+
+    user = data;
+
+    return user;
+  }
 }
 
 module.exports = new UserService();

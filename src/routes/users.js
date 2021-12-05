@@ -21,7 +21,8 @@ const {
 const {
   signUpSchema,
   logInSchema,
-  createUserSchema
+  createUserSchema,
+  updateUserSchema
 }             = require('../validations');
 
 router.route('/sign-up')
@@ -36,8 +37,8 @@ router.route('/')
 
 router.route('/:id')
   .get(verifyAuth, getUser)
-  // .patch(verifyAuth, validate(update, 'body'), updateUser)
-  // .put(verifyAuth, updateUser)
+  .patch(verifyAuth, validate(updateUserSchema, 'body'), updateUser)
+  .put(verifyAuth, validate(updateUserSchema, 'body'), updateUser)
   .delete(verifyAuth, deleteUser)
 
 module.exports = router;
