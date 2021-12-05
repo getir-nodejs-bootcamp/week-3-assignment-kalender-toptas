@@ -1,4 +1,4 @@
-const db              = require('../db/database');
+const db              = require('../database/database');
 const { userService } = require('../services');
 
 async function getUsers(_, res) {
