@@ -1,7 +1,8 @@
 const router  = require('express').Router();
 
 const {
-  verifyAuth
+  verifyAuth,
+  validate
 }             = require('../middlewares');
 
 const {
@@ -17,20 +18,25 @@ const {
   deleteUser
 }             = require('../controllers/users');
 
+const {
+  signUpSchema,
+  logInSchema
+}             = require('../validators');
+
 router.route('/sign-up')
-  .post(signUp)
+  .post(validate(signUpSchema, 'body'), signUp)
 
 router.route('/log-in')
-  .post(logIn)
+  .post(validate(logInSchema, 'body'), logIn)
 
 router.route('/')
   .get(verifyAuth, getUsers)
-  .post(createUser)
+  .post(verifyAuth, createUser)
 
 router.route('/:id')
-  .get(getUser)
-  .patch(updateUser)
-  .put(updateUser)
-  .delete(deleteUser)
+  .get(verifyAuth, getUser)
+  .patch(verifyAuth, updateUser)
+  .put(verifyAuth, updateUser)
+  .delete(verifyAuth, deleteUser)
 
 module.exports = router;
