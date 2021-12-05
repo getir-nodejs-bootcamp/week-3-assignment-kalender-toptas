@@ -1,7 +1,8 @@
-const db              = require('../database/database');
-const { userService } = require('../services');
+const db                        = require('../database/database');
+const { userService }           = require('../services');
+const { AppError, catchAsync }  = require('../utils');
 
-async function getUsers(_, res) {
+const getUsers = catchAsync(async (_, res) => {
   const users = db;
 
   res.status(200).json({
@@ -11,9 +12,9 @@ async function getUsers(_, res) {
       users
     }
   });
-}
+});
 
-async function getUser(req, res) {
+const getUser = catchAsync(async (req, res) => {
   const { id } = req.params;
 
   const user = userService.findById(id);
@@ -24,9 +25,9 @@ async function getUser(req, res) {
       user
     }
   });
-}
+});
 
-async function createUser(req, res) {
+const createUser = catchAsync(async (req, res) => {
   const { data } = req;
   
   const user = userService.save(data);
@@ -37,13 +38,11 @@ async function createUser(req, res) {
       user
     }
   });
-}
+});
 
-async function updateUser(req, res) {
+const updateUser = catchAsync(async (req, res) => {
   const { id }            = req.params;
   const { data, method }  = req;
-
-  console.log('data => ', data);
 
   let user;
 
@@ -56,9 +55,9 @@ async function updateUser(req, res) {
       user
     }
   });
-}
+});
 
-async function deleteUser(req, res) {
+const deleteUser = catchAsync(async (req, res) => {
   const { id } = req.params;
 
   userService.deleteById(id);
@@ -67,7 +66,7 @@ async function deleteUser(req, res) {
     status: 'success',
     data: null
   });
-}
+});
 
 module.exports = {
   getUsers,

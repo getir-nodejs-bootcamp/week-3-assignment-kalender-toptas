@@ -1,51 +1,89 @@
 const { v4: uuidv4 }  = require('uuid');
 const db              = require('../database/database');
+const { AppError }    = require('../utils');
 
 class UserService {
   save(user) {
-    user.id = uuidv4();
+    try {
+      user.id = uuidv4();
     
-    db.push(user);
-    
-    return user;
+      db.push(user);
+      
+      return user;
+    } catch (err) {
+      throw err;
+    }
   }
 
   findByEmail(email) {
-    const user = db.find(user => user.email === email);
-    
-    return user;
+    try {
+      const user = db.find(user => user.email === email);
+
+      return user;
+    } catch (err) {
+      throw err;
+    }
   }
 
   findById(id) {
-    const user = db.find(user => user.id == id);
+    try {
+      const user = db.find(user => user.id == id);
+
+      if (user === undefined) {
+        throw new AppError('Cannot find a user with this id.', 400);
+      }
     
-    return user;
+      return user;
+    } catch (err) {
+      throw err;
+    }
   }
 
   deleteById(id) {
-    const index = db.findIndex(user => user.id == id);
+    try {
+      const index = db.findIndex(user => user.id == id);
 
-    db.splice(index, 1);
+      if (index === -1) {
+        throw new AppError('Cannot find a user with this id.', 400);
+      }
+
+      db.splice(index, 1);
+    } catch (err) {
+      throw err;
+    }
   }
 
   findByIdAndPatch(id, data) {
-    const user = this.findById(id);
+    try {
+      const user = this.findById(id);
 
-    Object.keys(data).forEach(key => {
-      user[key] = data[key];
-    })
+      Object.keys(data).forEach(key => {
+        user[key] = data[key];
+      });
 
-    return user;
+      return user;
+    } catch (err) {
+      throw err;
+    }
   }
 
   findByIdAndPut(id, data) {
-    const index = db.findIndex(user => user.id == id);
-    const user  = data;
-    user.id     = id;
+    try {
+      const index = db.findIndex(user => user.id == id);
 
-    db.splice(index, 1, user);
+      if (index === -1) {
+        throw new AppError('Cannot find a user with this id.', 400);
+      }
 
-    return user;
+      const user  = data;
+      user.id     = id;
+  
+      db.splice(index, 1, user);
+  
+      return user;
+    } catch (err) {
+      throw err;
+    }
   }
 }
 

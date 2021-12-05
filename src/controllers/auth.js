@@ -1,10 +1,11 @@
 const jwt             = require('jsonwebtoken');
 const { userService } = require('../services');
 const { 
-  AppError
+  AppError,
+  catchAsync
 }                     = require('../utils');
 
-async function signUp(req, res) {
+const signUp = catchAsync(async (req, res) => {
   const { data }  = req;
   const user      = userService.save(data);
 
@@ -17,9 +18,9 @@ async function signUp(req, res) {
       user
     }
   });
-}
+});
 
-async function logIn(req, res, next) {
+const logIn = catchAsync(async (req, res, next) => {
   const {
     email,
     password
@@ -37,7 +38,7 @@ async function logIn(req, res, next) {
       user
     }
   });
-}
+});
 
 module.exports = {
   signUp,
