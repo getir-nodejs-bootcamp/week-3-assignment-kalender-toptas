@@ -17,7 +17,7 @@ class UserService {
   }
 
   findById(id) {
-    const user = db.find(user => user.id == id); // Double-equal used because type id can be both Number or String.
+    const user = db.find(user => user.id == id);
     
     return user;
   }
