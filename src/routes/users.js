@@ -21,7 +21,7 @@ const {
 const {
   signUpSchema,
   logInSchema
-}             = require('../validators');
+}             = require('../validations');
 
 router.route('/sign-up')
   .post(validate(signUpSchema, 'body'), signUp)
