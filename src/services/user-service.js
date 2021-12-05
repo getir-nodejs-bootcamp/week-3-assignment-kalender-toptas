@@ -17,9 +17,15 @@ class UserService {
   }
 
   findById(id) {
-    const user = db.find(user => user.id === id);
+    const user = db.find(user => user.id == id); // Double-equal used because type id can be both Number or String.
     
     return user;
+  }
+
+  deleteById(id) {
+    const index = db.findIndex(user => user.id == id);
+
+    db.splice(index, 1);
   }
 }
 

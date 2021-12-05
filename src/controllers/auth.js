@@ -25,6 +25,7 @@ async function logIn(req, res, next) {
     password
   }               = req.data;
   const user      = userService.findByEmail(email);
+  console.log('user => ', user);
   
   if (!user || !(user.password === password)) return next(new AppError('Invalid email or password.', 400));
 
